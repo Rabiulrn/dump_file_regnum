@@ -17,8 +17,9 @@ namespace RegnumServices
 			{
 				try
 				{
-					RegnumDataTrans regWork = new RegnumDataTrans();
-					regWork.SyncData();
+					//RegnumDataTrans regWork = new RegnumDataTrans();
+					//regWork.SyncData();
+					//_logger.LogInformation("execution Started");
 				}
 				catch (Exception ex)
 				{
@@ -31,16 +32,18 @@ namespace RegnumServices
 		}
 		public override Task StartAsync(CancellationToken cancellationToken)
 		{
-			//RegnumDataTrans regWork = new RegnumDataTrans();
-			//regWork.SyncData();
-			//_logger.LogInformation("Service Started");
+			RegnumDataTransSer regWork = new RegnumDataTransSer();
+			//regWork.SchemaBackUp();
+			_logger.LogInformation("Service Started");
 			return base.StartAsync(cancellationToken);
 		}
 
 		public override Task StopAsync(CancellationToken cancellationToken)
 		{
-			//_logger.LogInformation("Service stopped");
+			_logger.LogInformation("Service stopped");
 			return base.StopAsync(cancellationToken);
 		}
+		
+		
 	}
 }
