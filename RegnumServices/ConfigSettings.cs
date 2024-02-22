@@ -13,7 +13,21 @@ namespace RegnumServices
 			var configsetting = new ConfigurationBuilder().
 			AddJsonFile("appsettings.json").Build();
 			return configsetting[$@"ConnectionStrings:{ConnectionStringName}"].ToString();
-			
+		
+		}
+		
+		public string QuerySetting(string valueName)
+		{
+			var configsetting = new ConfigurationBuilder().
+			AddJsonFile("appsettings.json").Build();
+			return configsetting[$@"DB_Query_Values:{valueName}"].ToString();
+		
+		}
+		public string TimersSetting(string timeInterval)
+		{
+			var configsetting = new ConfigurationBuilder().
+			AddJsonFile("appsettings.json").Build();
+			return configsetting[$@"LoggingTimes:{timeInterval}"].ToString();
 		
 		}
 		
