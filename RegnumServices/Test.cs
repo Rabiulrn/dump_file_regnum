@@ -1,5 +1,7 @@
-﻿using ApiFetcher;
-using Entities.Models;
+﻿
+
+using RegnumServices.Entities.Models;
+using RegnumServices.ServiceManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;

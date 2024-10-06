@@ -1,5 +1,6 @@
-using ApiFetcher;
-using Entities.Models;
+
+using RegnumServices.Entities.Models;
+using RegnumServices.ServiceManager;
 using ServiceManager;
 
 namespace RegnumServices
@@ -64,8 +65,14 @@ namespace RegnumServices
 
             };
 
-            DBBackUpModule regWork = new DBBackUpModule();
-            regWork.SyncDBBackups(conString, obj);
+
+
+            DBBackUpModule regWorkS = new DBBackUpModule();
+            regWorkS.SyncDBBackups(conString, obj);
+
+            //DBBackUpModule regWork = new DBBackUpModule();
+            //regWork.SyncDBBackups(conString, (QuerySettingDTO)obj);  // Explicit cast to remove ambiguity
+
 
             _logger.LogInformation("Service Started");
             return base.StartAsync(cancellationToken);
