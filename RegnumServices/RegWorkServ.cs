@@ -62,6 +62,7 @@ namespace RegnumServices
                 LogFileName = settings.QuerySetting("LogFileName"),
                 DirectoryName = settings.QuerySetting("DirectoryName"),
                 DBUserName = settings.QuerySetting("DBUserName"),
+                DirectoryPath = settings.QuerySetting("DirectoryPath"),
 
             };
 

@@ -29,5 +29,7 @@ namespace RegnumServices.Entities.Models
         }
         public string DirectoryName { get; set; }
         public string DBUserName { get; set; }
+
+        public string DirectoryPath { get; set; } 
     }
 }
