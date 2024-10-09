@@ -31,6 +31,7 @@ namespace RegnumServices
                         LogFileName = settingss.QuerySetting("LogFileName"),
                         DirectoryName = settingss.QuerySetting("DirectoryName"),
                         DBUserName = settingss.QuerySetting("DBUserName"),
+                        DirectoryPath = settingss.QuerySetting("DirectoryPath"),
 
                     };
 
@@ -50,34 +51,58 @@ namespace RegnumServices
                 await Task.Delay(1000 * InterValsofTime, stoppingToken);
             }
         }
-        public override Task StartAsync(CancellationToken cancellationToken)
+
+
+        public override async Task StartAsync(CancellationToken cancellationToken)
         {
-            ConfigSettings settings = new ConfigSettings();
-            string conString = settings.configSetting("DBBackup");
+            _logger.LogInformation("Service is starting...");
 
-            QuerySettingDTO obj = new QuerySettingDTO()
+            try
             {
-                JobName = settings.QuerySetting("JobName"),
-                DMPFileName = settings.QuerySetting("DMPFileName"),
-                LogFileName = settings.QuerySetting("LogFileName"),
-                DirectoryName = settings.QuerySetting("DirectoryName"),
-                DBUserName = settings.QuerySetting("DBUserName"),
-                DirectoryPath = settings.QuerySetting("DirectoryPath"),
+                // Perform any lightweight or necessary setup work here
+                // Example: Initialize configurations, verify parameters, etc.
+                _logger.LogInformation("Initial setup completed.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during service startup: " + ex.Message);
+                throw;  // Optional: Throw if the service should not start in case of an error
+            }
 
-            };
-
-
-
-            DBBackUpModule regWorkS = new DBBackUpModule();
-            regWorkS.SyncDBBackups(conString, obj);
-
-            //DBBackUpModule regWork = new DBBackUpModule();
-            //regWork.SyncDBBackups(conString, (QuerySettingDTO)obj);  // Explicit cast to remove ambiguity
-
-
-            _logger.LogInformation("Service Started");
-            return base.StartAsync(cancellationToken);
+            // Call the base class's StartAsync to continue with the service lifecycle
+            await base.StartAsync(cancellationToken);
         }
+
+
+
+        //public override Task StartAsync(CancellationToken cancellationToken)
+        //{
+        //    ConfigSettings settings = new ConfigSettings();
+        //    string conString = settings.configSetting("DBBackup");
+
+        //    QuerySettingDTO obj = new QuerySettingDTO()
+        //    {
+        //        JobName = settings.QuerySetting("JobName"),
+        //        DMPFileName = settings.QuerySetting("DMPFileName"),
+        //        LogFileName = settings.QuerySetting("LogFileName"),
+        //        DirectoryName = settings.QuerySetting("DirectoryName"),
+        //        DBUserName = settings.QuerySetting("DBUserName"),
+        //        DirectoryPath = settings.QuerySetting("DirectoryPath"),
+
+        //    };
+
+
+
+        //    DBBackUpModule regWorkS = new DBBackUpModule();
+        //    regWorkS.SyncDBBackups(conString, obj);
+
+        //    //DBBackUpModule regWork = new DBBackUpModule();
+        //    //regWork.SyncDBBackups(conString, (QuerySettingDTO)obj);  // Explicit cast to remove ambiguity
+
+
+        //    _logger.LogInformation("Service Started");
+        //    return base.StartAsync(cancellationToken);
+        //}
 
         public override Task StopAsync(CancellationToken cancellationToken)
         {

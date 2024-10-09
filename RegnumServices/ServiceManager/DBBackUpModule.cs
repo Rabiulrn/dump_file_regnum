@@ -83,7 +83,6 @@ namespace RegnumServices.ServiceManager
 
                         // Ensure the correct file name format, including uppercase and proper structure
                         string dmpFileName = $"{settingDTO.DMPFileName}.DMP";
-                        string path = settingDTO.DirectoryPath;
                         string logFileName = $"{settingDTO.LogFileName}_BACKUP{timestamp}.LOG";
 
                         // Use the corrected file names in the DBMS_DATAPUMP command
